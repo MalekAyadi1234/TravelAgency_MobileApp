@@ -1,0 +1,77 @@
+package com.example.retrofitdemo.adapter
+import android.content.Intent
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.example.retrofitdemo.ChooseSeatActivity
+import com.example.retrofitdemo.MainActivity2
+import com.example.retrofitdemo.R
+import com.example.retrofitdemo.model.SeanceItem
+import kotlinx.android.synthetic.main.row_layout.view.*
+class MyAdapter: RecyclerView.Adapter<MyAdapter.MyViewHolder>(){
+
+    private var myList = emptyList<SeanceItem>()
+
+    inner class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+        return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.row_layout, parent, false))
+    }
+
+    override fun getItemCount(): Int {
+        return myList.size
+    }
+
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        holder.itemView.setOnClickListener { v ->
+            val intent = Intent(v.context, MainActivity2::class.java).apply {
+                putExtra("id", myList[position].id)
+                putExtra("date", myList[position].dateSeance)
+            }
+            v.context.startActivity(intent)
+        }
+        if (myList[position].duree.toString().equals("1")){
+            holder.itemView.loukaaa.setBackgroundResource(R.drawable.sahara)
+            holder.itemView.userId_txt.text ="Ref: "+myList[position].numSeance.toString()
+            holder.itemView.id_txt.text = myList[position].id.toString()
+            holder.itemView.title_txt.text = myList[position].duree.toString()
+            holder.itemView.body_txt.text =myList[position].heureDebut
+            holder.itemView.tvEndTime.text=myList[position].heureFin
+
+        }else if  (myList[position].duree.toString().equals("2")){
+            holder.itemView.loukaaa.setBackgroundResource(R.drawable.mountain)
+            holder.itemView.userId_txt.text ="Ref: "+myList[position].numSeance.toString()
+            holder.itemView.id_txt.text = myList[position].id.toString()
+            holder.itemView.title_txt.text = myList[position].duree.toString()
+            holder.itemView.body_txt.text =myList[position].heureDebut
+            holder.itemView.tvEndTime.text=myList[position].heureFin
+
+        }else if  (myList[position].duree.toString().equals("3")){
+            holder.itemView.loukaaa.setBackgroundResource(R.drawable.sea)
+            holder.itemView.userId_txt.text ="Ref: "+myList[position].numSeance.toString()
+            holder.itemView.id_txt.text = myList[position].id.toString()
+            holder.itemView.title_txt.text = myList[position].duree.toString()
+            holder.itemView.body_txt.text =myList[position].heureDebut
+            holder.itemView.tvEndTime.text=myList[position].heureFin
+
+        }else {
+            holder.itemView.loukaaa.setBackgroundResource(R.drawable.mountain)
+            holder.itemView.userId_txt.text ="Ref: "+myList[position].numSeance.toString()
+            holder.itemView.id_txt.text = myList[position].id.toString()
+            holder.itemView.title_txt.text = myList[position].duree.toString()
+            holder.itemView.body_txt.text =myList[position].heureDebut
+            holder.itemView.tvEndTime.text=myList[position].heureFin
+        }
+
+    }
+
+    fun setData(newList: List<SeanceItem>){
+        myList = newList
+        notifyDataSetChanged()
+    }
+    fun navigate(){
+
+
+    }
+}
